@@ -1,0 +1,64 @@
+<html   xmlns="http://www.w3.org/1999/xhtml"
+        xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="utf-8">
+    <title>WP lab - Confirmation Info</title>
+    <style type="text/css">
+        body {
+            width: 800px;
+            margin: auto;
+        }
+        table {
+            width:100%;
+        }
+        table, td, th {
+            border: 1px solid black;
+            padding: 3px 2px;
+        }
+    </style>
+</head>
+<body>
+<section>
+    <header>
+        <h1>Balloon Order page - Order confirmation </h1>
+    </header>
+    <table>
+        <tr>
+            <th colspan="2">
+                Your Order Status
+            </th>
+        </tr>
+        <tr>
+            <td><b>Client Name </b></td>
+            <td th:text="${session.username}"></td>
+        </tr>
+        <tr>
+            <td><b>Client IP Address</b></td>
+            <td th:text="${ipAddress}"></td>
+        </tr>
+        <tr>
+            <td><b>Client Browser</b></td>
+            <td th:text="${clientAgent}"></td>
+        </tr>
+        <tr>
+            <td><b>Balloon Color </b></td>
+            <td th:text="${session.boja}"></td>
+        </tr>
+        <tr>
+            <td><b>Balloon Size </b></td>
+            <td th:text="${session.golemina}"></td>
+        </tr>
+    </table>
+    <div>
+        <form th:action="@{/ConfirmationInfo}" th:method="POST">
+        <input type="submit" value="Log out">
+        </form>
+        <form th:action="@{'/orders'}" th:method="GET">
+            <button type="submit" class="btn btn-sm btn-info"><i class="fa">View Orders</i></button>
+        </form>
+    </div>
+
+
+</section>
+</body>
+</html>

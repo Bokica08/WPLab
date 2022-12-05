@@ -1,0 +1,48 @@
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org" xmlns:td="http://www.thymeleaf.org"
+      lang="en">
+<head>
+    <meta charset="utf-8">
+    <title>All orders</title>
+    <style type="text/css">
+        body {
+            width: 800px;
+            margin: auto;
+        }
+    </style>
+</head>
+<body>
+<header>
+    <h1>All Orders</h1>
+</header>
+<main>
+    <table>
+        <thead>
+        <tr>
+            <th>Color</th>
+            <th>Size</th>
+            <th>Time</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr th:each="order : ${orders}">
+            <td th:text="${order.getBalloonColor()}"></td>
+            <td th:text="${order.getBalloonSize()}"></td>
+            <td th:text="${order.getDateCreated()}"></td>
+        </tr>
+        </tbody>
+    </table>
+    <h1 th:text="${color}"></h1>
+    <form th:action="@{'/orders/filtered'}" th:method="GET">
+    From
+    <label>
+        <input type="datetime-local" name="dateFrom"/>
+    </label><br>
+    To
+    <label>
+        <input type="datetime-local" name="dateTo"/>
+    </label>
+    <button type="submit" class="btn btn-primary">Submit</button>
+    </form>
+</main>
+</body>
+</html>

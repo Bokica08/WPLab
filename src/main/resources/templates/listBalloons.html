@@ -1,0 +1,54 @@
+<html   xmlns="http://www.w3.org/1999/xhtml"
+        xmlns:th="http://www.thymeleaf.org">
+<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
+<head>
+    <meta charset="utf-8">
+    <title>Balloon Order page - Welcome and choose a Balloon</title>
+    <style type="text/css">
+        body {
+            width: 800px;
+            margin: auto;
+        }
+    </style>
+</head>
+<body>
+<header>
+    <h1>Welcome to our Balloon Shop App</h1>
+</header>
+<main>
+    <main>
+        <h2>Choose balloon color:</h2>
+        <form th:action="@{servlet}" th:method="POST">
+        <input type="radio" name="color" value="Red Balloon"> Red Balloon<br/>
+        <input type="radio" name="color" value="Green Balloon"> Green Balloon<br/>
+        <input type="radio" name="color" value="Yellow Balloon"> Yellow Balloon<br/>
+        <input type="radio" name="color" value="Blue Balloon"> Blue Balloon<br/>
+
+        <br/>
+            <input type="submit" value="Submit">
+        </form>
+    </main>
+    <a th:href="@{'/balloons/add-form'}" class="btn btn-block btn-dark">Add new product</a>
+
+</main>
+<h2>All balloons</h2>
+<ul>
+    <li th:each="balloon:${balloons}"><th:block th:text="${balloon.getName()}"></th:block>
+    <th:block th:text="${balloon.getDescription()}"></th:block>
+        <th:block th:text="${balloon.getManufacturer().getName()}"></th:block>
+        <th:block th:text="${balloon.getManufacturer().getCountry()}"></th:block>
+        <form th:action="@{'/balloons/delete/{id}' (id=${balloon.getId()})}" th:method="DELETE">
+            <button type="submit" class="btn btn-sm btn-danger"><i class="fa fa-trash">Delete</i></button>
+        </form>
+        <a th:href="@{'/balloons/edit-form/{id}' (id=${balloon.getId()})}" class="btn btn-sm btn-info"><i class="fa fa-trash">Edit</i></a>
+    </li>
+</ul>
+<form th:method="POST" th:action="@{'/balloons/str'}">
+    <input type="text" name="text">
+    <button type="submit" name="submit">Izbrisi po string</button>
+</form>
+</body>
+</html>
