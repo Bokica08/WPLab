@@ -1,3 +1,4 @@
+/*
 package mk.finki.ukim.mk.lab.web.Filter;
 import mk.finki.ukim.mk.lab.model.User;
 
@@ -37,3 +38,4 @@ public class LoginFilter implements Filter {
 
     }
 }
+*/

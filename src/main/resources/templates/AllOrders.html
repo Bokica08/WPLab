@@ -1,7 +1,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org" xmlns:td="http://www.thymeleaf.org"
       lang="en">
 <head>
-    <meta charset="utf-8">
+    <meta charset="utf-8"/>
     <title>All orders</title>
     <style type="text/css">
         body {
@@ -36,12 +36,15 @@
     From
     <label>
         <input type="datetime-local" name="dateFrom"/>
-    </label><br>
+    </label>
     To
     <label>
         <input type="datetime-local" name="dateTo"/>
     </label>
     <button type="submit" class="btn btn-primary">Submit</button>
+    </form>
+    <form th:action="@{/ConfirmationInfo}" th:method="POST">
+        <input type="submit" value="Log out"/>
     </form>
 </main>
 </body>

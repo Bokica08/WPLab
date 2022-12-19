@@ -2,6 +2,7 @@ package mk.finki.ukim.mk.lab.web.Servlets;
 
 import mk.finki.ukim.mk.lab.model.Order;
 import mk.finki.ukim.mk.lab.service.OrderService;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.thymeleaf.context.WebContext;
 import org.thymeleaf.spring5.SpringTemplateEngine;
 
@@ -20,15 +21,16 @@ public class ViewOrdersServlet extends HttpServlet {
         this.orderService=orderService;
     }
     @Override
-    protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+    protected void doGet(HttpServletRequest request, HttpServletResponse response) throws IOException {
         WebContext context=new WebContext(request,response,request.getServletContext());
         context.setVariable("orders",this.orderService.listAll());
+        response.setContentType("application/xhtml+xml");
         this.springTemplateEngine.process("AllOrders",context,response.getWriter());
 
     }
 
     @Override
-    protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+    protected void doPost(HttpServletRequest request, HttpServletResponse response) throws  IOException {
 
     }
 }

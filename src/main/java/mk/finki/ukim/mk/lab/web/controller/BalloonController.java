@@ -4,6 +4,7 @@ import mk.finki.ukim.mk.lab.model.Balloon;
 import mk.finki.ukim.mk.lab.model.Manufacturer;
 import mk.finki.ukim.mk.lab.service.BalloonService;
 import mk.finki.ukim.mk.lab.service.ManufacturerService;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
@@ -34,18 +35,22 @@ public class BalloonController {
         model.addAttribute("balloons",balloonList);
         return "listBalloons";
     }
+
     @PostMapping("/add")
     public String saveBalloon(@RequestParam String ime, @RequestParam String description, @RequestParam Long idManu)
     {
         balloonService.save(ime,description,idManu);
         return "redirect:/balloons";
     }
+
     @PostMapping("/str")
     public String deleteByStr(@RequestParam String text)
     {
         balloonService.deleteByStr(text);
         return "redirect:/balloons";
     }
+
+
     @GetMapping("/add-form")
     public String getAddBalloonPage(Model m)
     {
@@ -53,12 +58,14 @@ public class BalloonController {
         m.addAttribute("manufacturers",manufacturers);
         return "add-balloon";
     }
+
     @DeleteMapping("/delete/{id}")
     public String deleteBalloon(@PathVariable Long id)
     {
     this.balloonService.deleteById(id);
     return "redirect:/balloons";
     }
+
     @GetMapping("/edit-form/{id}")
     public String getEditBalloonPage(@PathVariable Long id,Model model)
     {

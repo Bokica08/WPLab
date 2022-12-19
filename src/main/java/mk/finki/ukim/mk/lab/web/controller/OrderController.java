@@ -2,10 +2,12 @@ package mk.finki.ukim.mk.lab.web.controller;
 
 import mk.finki.ukim.mk.lab.Exceptions.UserNotFound;
 import mk.finki.ukim.mk.lab.model.Order;
+import mk.finki.ukim.mk.lab.model.User;
 import mk.finki.ukim.mk.lab.service.OrderService;
 import mk.finki.ukim.mk.lab.service.ShoppingCartService;
 import net.bytebuddy.asm.Advice;
 import org.springframework.format.annotation.DateTimeFormat;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -44,17 +46,15 @@ public class OrderController {
         model.addAttribute("orders",orders);
         return "AllOrders";
     }
+
     @GetMapping("/filtered")
-    public String viewFilteredOrders(Model model, @RequestParam @DateTimeFormat(iso= DateTimeFormat.ISO.DATE_TIME) LocalDateTime dateFrom,
+    public String viewFilteredOrders(HttpServletRequest request,Model model, @RequestParam @DateTimeFormat(iso= DateTimeFormat.ISO.DATE_TIME) LocalDateTime dateFrom,
                                      @RequestParam @DateTimeFormat(iso= DateTimeFormat.ISO.DATE_TIME) LocalDateTime dateTo)
     {
 
-/*        String dateFrom = request.getParameter("dateFrom");
-        String dateTo =  request.getParameter("dateTo");
-        LocalDateTime from=LocalDateTime.parse(dateFrom);
-        LocalDateTime to=LocalDateTime.parse(dateTo);*/
 
-        List<Order> orders=orderService.findByDateCreatedBetween(dateFrom,dateTo);
+        User user=(User) request.getSession().getAttribute("user");
+        List<Order> orders=orderService.findByDateCreatedBetweenAndUser(dateFrom,dateTo,user);
         model.addAttribute("orders",orders);
         return "FilterOrders";
     }

@@ -3,6 +3,7 @@ package mk.finki.ukim.mk.lab.web.Servlets;
 import mk.finki.ukim.mk.lab.model.Balloon;
 import mk.finki.ukim.mk.lab.model.Order;
 import mk.finki.ukim.mk.lab.service.BalloonService;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.thymeleaf.context.WebContext;
 import org.thymeleaf.spring5.SpringTemplateEngine;
 
@@ -24,15 +25,16 @@ public class BalloonListServlet extends HttpServlet{
     }
 
     @Override
-    protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+    protected void doGet(HttpServletRequest req, HttpServletResponse resp)throws IOException {
         List<Balloon> balloonList = balloonService.listAll();
         WebContext context = new WebContext(req, resp, req.getServletContext());
         context.setVariable("balloons", balloonList);
+        resp.setContentType("application/xhtml+xml");
         this.springTemplateEngine.process("listBalloons.html",context,resp.getWriter());
     }
 
     @Override
-    protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+    protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws  IOException {
         String color = req.getParameter("color");
         req.getSession().setAttribute("boja",color);
         resp.sendRedirect("/selectBalloon");

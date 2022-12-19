@@ -1,9 +1,10 @@
 <html   xmlns="http://www.w3.org/1999/xhtml"
         xmlns:th="http://www.thymeleaf.org">
+<meta charset="utf-8"/>
 <head>
-    <meta charset="utf-8">
+
     <title>Balloon Order page - Balloon Size</title>
-    <style type = "text/css">
+    <style  type="text/css">
         body {
             width: 800px;
             margin: auto;
@@ -34,12 +35,12 @@
 <section>
     <h2>Choose balloon size:</h2>
     <form th:action="@{selectBalloon}" th:method="POST">
-    <input type="radio" name="size" value="Small"> Small <br/>
-    <input type="radio" name="size" value="Medium"> Medium <br/>
-    <input type="radio" name="size" value="Big"> Big <br/>
-    <input type="radio" name="size" value="Extra Big"> Extra Big <br/>
+    <input type="radio" name="size" value="Small"/> Small <br/>
+    <input type="radio" name="size" value="Medium"/> Medium <br/>
+    <input type="radio" name="size" value="Big"/> Big <br/>
+    <input type="radio" name="size" value="Extra Big"/> Extra Big <br/>
     <br/>
-    <input type="submit" value="Submit">
+    <input type="submit" value="Submit"/>
     </form>
 </section>
 <aside>

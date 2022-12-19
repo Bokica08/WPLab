@@ -3,6 +3,7 @@ package mk.finki.ukim.mk.lab.web.Servlets;
 import mk.finki.ukim.mk.lab.Exceptions.UserNotFound;
 import mk.finki.ukim.mk.lab.model.Order;
 import mk.finki.ukim.mk.lab.service.OrderService;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.thymeleaf.context.WebContext;
 import org.thymeleaf.spring5.SpringTemplateEngine;
 
@@ -23,23 +24,26 @@ public class BalloonOrderServlet extends HttpServlet {
     }
 
     @Override
-    protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+    protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws  IOException {
         WebContext context = new WebContext(req,resp,req.getServletContext());
         String color = (String) req.getSession().getAttribute("color");
         String size = (String) req.getSession().getAttribute("size");
         context.setVariable("color",color);
         context.setVariable("size",size);
+        resp.setContentType("application/xhtml+xml");
         springTemplateEngine.process("deliveryInfo.html", context, resp.getWriter());
     }
 
     @Override
 
-    protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+    protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws  IOException {
         String color = (String) req.getSession().getAttribute("golemina");
         String size = (String) req.getSession().getAttribute("boja");
         String username = (String) req.getSession().getAttribute("username");
         LocalDateTime localDateTime = LocalDateTime.parse(req.getParameter("dateForOrder"));
         localDateTime.format(DateTimeFormatter.ofPattern("dd-MM-yyyy HH:mm:ss"));
+        req.getSession().setAttribute("time",localDateTime);
+
         Order order=null;
         try {
             order = orderService.placeOrder(color,size,username, localDateTime);

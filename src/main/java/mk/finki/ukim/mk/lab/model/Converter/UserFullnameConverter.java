@@ -31,7 +31,7 @@ public class UserFullnameConverter implements AttributeConverter<UserFullname,St
     }
 
     @Override
-    public UserFullname convertToEntityAttribute(String s) {
+    public  UserFullname convertToEntityAttribute(String s) {
         if (s == null || s.isEmpty()) {
             return null;
         }

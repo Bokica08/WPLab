@@ -33,5 +33,8 @@
   </table>
   <h1 th:text="${color}"></h1>
 </main>
+<form th:action="@{/ConfirmationInfo}" th:method="POST">
+  <input type="submit" value="Log out">
+</form>
 </body>
 </html>

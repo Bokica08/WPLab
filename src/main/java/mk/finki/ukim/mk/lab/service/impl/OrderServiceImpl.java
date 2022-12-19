@@ -43,7 +43,7 @@ public class OrderServiceImpl implements OrderService {
     }
 
     @Override
-    public List<Order> findByDateCreatedBetween(LocalDateTime time1, LocalDateTime time2) {
-        return repository.findByDateCreatedBetween(time1,time2);
+    public List<Order> findByDateCreatedBetweenAndUser(LocalDateTime time1, LocalDateTime time2,User user) {
+        return repository.findByDateCreatedBetweenAndUser(time1,time2,user);
     }
 }

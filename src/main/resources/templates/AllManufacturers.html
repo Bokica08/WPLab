@@ -1,0 +1,16 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<h2>All Manufacturers</h2>
+<ul>
+  <li th:each="manufacturer:${manufacturers}"><th:block th:text="${manufacturer.getName()}"></th:block>
+    <th:block th:text="${manufacturer.getCountry()}"></th:block>
+    <th:block th:text="${manufacturer.getAddress()}"></th:block>
+
+</ul>
+</body>
+</html>
